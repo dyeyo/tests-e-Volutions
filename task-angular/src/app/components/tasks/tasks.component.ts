@@ -28,11 +28,13 @@ export class TasksComponent implements OnInit {
     expirationDate: ['', [Validators.required]],
   });
   tasks: [] = [];
+  tasksVendica: [] = [];
+  tasksVendicaOne: [] = [];
+  tasksOne: [] = [];
   dataEdit: any;
   bndEdit: boolean = false;
   task: Task;
   idUserLogged: any;
-
   constructor(private taskService: TaskService, private formBuilder: FormBuilder,
     private modalService: NgbModal, private toastr: ToastrService,
     private authService: AuthService, private router: Router) { }
@@ -42,10 +44,18 @@ export class TasksComponent implements OnInit {
     sessionStorage.setItem('usuario', this.idUserLogged)
     this.getTask();
   }
-
+  0
   getTask() {
     this.taskService.getTask().subscribe((res: any) => {
-      this.tasks = res.filter(task => task.userId == sessionStorage.getItem('usuario'));
+      const dateNow = new Date();
+      let mes = dateNow.getMonth() + 1
+      const diaHoy = dateNow.getFullYear() + '-' + mes + '-' + dateNow.getDate() + 'T' + dateNow.getHours() + ':' + dateNow.getMinutes();
+      this.tasksOne = res.filter(task => task.userId == sessionStorage.getItem('usuario'));
+      this.tasks = res.filter(task => task.expirationDate >= diaHoy);
+
+      this.tasksVendicaOne = res.filter(task => task.userId == sessionStorage.getItem('usuario'));
+      this.tasksVendica = res.filter(task => task.expirationDate < diaHoy);
+
     }, (error) => {
       console.log(error);
       this.toastr.success('Lo sentimos, algo va mal!', 'Ups!');

@@ -8,8 +8,34 @@
       <button class="btn btn-primary" (click)="openModal(add)">Agregar Tarea</button>
     </div>
   </div>
+  <h2>Tareas con tiempo</h2>
   <div class="row">
     <div class="col-md-4 mt-5" *ngFor="let task of tasks">
+      <div class="card" id="carta">
+        <div class="card-body">
+          <h3 class="card-title">{{task.name}}</h3>
+          <h5>Prioridad <span class="badge badge-warning text-white">{{task.priority}}</span></h5>
+          <p>Vence el {{task.expirationDate | date:'short'}}</p>
+          <div class="row">
+            <div class="col-2">
+              <a (click)="editTask(add,task)" class="color-warning">
+                <i class="fa fa-edit" style="color: #ffc107;"></i>
+              </a>
+            </div>
+            <div class="col-2">
+              <a (click)="deleteTask(task)" class="color-danger">
+                <i class="fa fa-trash" style="color: red;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <h2>Tareas vencidas</h2>
+  <div class="row">
+    <div class="col-md-4 mt-5" *ngFor="let task of tasksVendica">
       <div class="card" id="carta">
         <div class="card-body">
           <h3 class="card-title">{{task.name}}</h3>
