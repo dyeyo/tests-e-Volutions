@@ -1,0 +1,33 @@
+<div class="container" id="img">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card" id="carta">
+        <div class="card-body">
+          <h5 class="card-title">Inicio de Sesion</h5>
+          <div class="alert alert-danger" *ngIf="hasError">
+            <span>Datos incorrectos, por favor intentelo nuevamente</span>
+          </div>
+          <form [formGroup]="formLogin" (ngSubmit)="login()">
+            <div class="form-group">
+              <label for="email">Correo Electrónico</label>
+              <input type="email" class="form-control" formControlName="email" name="email" id="email"
+                aria-describedby="emailHelp" placeholder="email@gmial.com">
+            </div>
+            <div class="form-group">
+              <label for="pass">Contraseña</label>
+              <input type="password" class="form-control" formControlName="password" name="password" id="pass"
+                placeholder="Contraseña">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+            <a routerLink="registro">Aun no tienes cuenta? Registrate ahora</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  body {
+    background: red;
+  }
+</style>
