@@ -49,7 +49,7 @@ export class TasksComponent implements OnInit {
     this.taskService.getTask().subscribe((res: any) => {
       const dateNow = new Date();
       let mes = dateNow.getMonth() + 1
-      const diaHoy = dateNow.getFullYear() + '-' + mes + '-' + dateNow.getDate() + 'T' + dateNow.getHours() + ':' + dateNow.getMinutes();
+      const diaHoy = dateNow.getFullYear() + '-' + mes + '-' + dateNow.getDate();
       this.tasksOne = res.filter(task => task.userId == sessionStorage.getItem('usuario'));
       this.tasks = res.filter(task => task.expirationDate >= diaHoy);
 
